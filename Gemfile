@@ -75,3 +75,7 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+# Enables the usage of the dotenv files
+gem 'dotenv-rails', groups: [:development, :test]
+
