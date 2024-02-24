@@ -36,3 +36,5 @@
 # Ignore local environment file
 .env.local
 
+
+/config/credentials/development.key

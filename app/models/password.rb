@@ -4,4 +4,8 @@ class Password < ApplicationRecord
   # through association and direct access to user in users.rb via user_password.rb
   has_many :user_passwords
   has_many :users, through: :user_passwords
+
+  # using the ActiveRecord encryption. keys are in /config/credentials
+  encrypts :username, deterministic: true
+  encrypts :password
 end
