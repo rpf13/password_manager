@@ -8,4 +8,8 @@ class Password < ApplicationRecord
   # using the ActiveRecord encryption. keys are in /config/credentials
   encrypts :username, deterministic: true
   encrypts :password
+
+  validates :url, presence: true
+  validates :username, presence: true
+  validates :password, presence: true
 end
