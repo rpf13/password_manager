@@ -7,6 +7,6 @@ class User < ApplicationRecord
 # relation to the user_passwords db and create link for passwords to be
 # directly accessible, since we tell rails that the passwords are reached
 # through the user_passwords table.
-  has_many :user_passwords
+  has_many :user_passwords, dependent: :destroy
   has_many :passwords, through: :user_passwords
 end

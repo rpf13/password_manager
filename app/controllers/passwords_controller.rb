@@ -7,6 +7,7 @@ class PasswordsController < ApplicationController
   end
 
   def show
+    # no code required since we have the before_action :set_password
   end
 
   def new
@@ -28,6 +29,23 @@ class PasswordsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    # no code required since we have the before_action :set_password
+  end
+
+  def update
+    if @password.update(password_params)
+      redirect_to @password
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @password.destroy
+    redirect_to root_path
   end
 end
 
