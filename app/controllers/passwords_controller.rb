@@ -16,15 +16,17 @@ class PasswordsController < ApplicationController
 
   def create
     # an alternative way of creatign the password would be the following
-    # commented out code
-    # @password = Password.new(password_params)
-    # @password.user_passwords.new(user: current_user)
-    # if @password.save
-    #   ...rest of the if code
-    # however,the preferred way is to let rails to the magic and create the
+    # but as soon as we did introduce the role parameter, we did change
+    # back to the other code
+    # the way the commented code is doing it is to let rails to the magic and create the
     # join action through automatically
-    @password = current_user.passwords.create(password_params)
-    if @password.persisted?
+    # @password = current_user.passwords.create(password_params)
+    # if @password.persisted?
+    #   redirect_to @password
+    # else
+    @password = Password.new(password_params)
+    @password.user_passwords.new(user: current_user, role: :owner)
+    if @password.save
       redirect_to @password
     else
       render :new, status: :unprocessable_entity
