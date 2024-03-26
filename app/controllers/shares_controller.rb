@@ -4,8 +4,10 @@ class SharesController < ApplicationController
 
   def new
     # The current_user is excluded from the dropdown list, and once a password
-    # is shared with another user, that user is also excluded.
-    @users = User.excluding(@password.users)
+    # is shared with another user, that user is also excluded. This has been
+    # moved to the /shares/new.html.erb to have it for the new
+    # and the create action in one place
+    # @users = User.excluding(@password.users)
     @user_password = UserPassword.new
   end
 
@@ -14,6 +16,8 @@ class SharesController < ApplicationController
     if @user_password.save
       redirect_to @password
     else
+      # see comment under new action
+      # @users = User.excluding(@password.users)
       render :new, status: :unprocessable_entity
     end
   end
@@ -30,7 +34,7 @@ class SharesController < ApplicationController
   end
 
   def user_password_params
-    params.require(:user_password).permit(:user_id, :owner)
+    params.require(:user_password).permit(:user_id, :role)
   end
 end
 
