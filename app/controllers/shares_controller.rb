@@ -1,6 +1,7 @@
 class SharesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_password
+  before_action :require_editable_permission
 
   def new
     # The current_user is excluded from the dropdown list, and once a password
@@ -35,6 +36,14 @@ class SharesController < ApplicationController
 
   def user_password_params
     params.require(:user_password).permit(:user_id, :role)
+  end
+
+  def require_editable_permission
+    redirect_to @password unless current_user_password.editable?
+  end
+
+  def require_shareable_permission
+    redirect_to @password unless current_user_password.shareable?
   end
 end
 
