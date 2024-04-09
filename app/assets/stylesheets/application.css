@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+/* Override the prose included class for styling the nav ul, since the list-none does not work and gets overwritten by prose default */
+.prose nav ul {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+}
+
